@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Tracker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Crypto Portfolio Tracker</h1>
-    <p>Track your cryptocurrency investments</p>
+    <div class="container">
+        <header>
+            <h1>Crypto Portfolio Tracker</h1>
+            <p>Track your cryptocurrency investments in real-time</p>
+        </header>
+
+        <main>
+            <section class="crypto-prices">
+                <h2>Top Cryptocurrencies</h2>
+                <div id="crypto-list" class="crypto-grid">
+                    <!-- Crypto prices will be loaded here -->
+                </div>
+            </section>
+
+            <section class="portfolio">
+                <h2>My Portfolio</h2>
+                <div class="portfolio-summary">
+                    <div class="total-value">
+                        <span>Total Value: $</span>
+                        <span id="total-value">0.00</span>
+                    </div>
+                </div>
+                <div id="portfolio-list">
+                    <!-- Portfolio items will be loaded here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
