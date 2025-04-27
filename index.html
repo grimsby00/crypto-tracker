@@ -29,6 +29,17 @@
                         <span id="total-value">0.00</span>
                     </div>
                 </div>
+
+                <div class="add-holding">
+                    <h3>Add Holding</h3>
+                    <form id="add-holding-form">
+                        <input type="text" id="symbol-input" placeholder="Symbol (e.g., BTC)" required>
+                        <input type="number" id="amount-input" placeholder="Amount" step="any" required>
+                        <input type="number" id="price-input" placeholder="Purchase Price ($)" step="any" required>
+                        <button type="submit">Add to Portfolio</button>
+                    </form>
+                </div>
+
                 <div id="portfolio-list">
                     <!-- Portfolio items will be loaded here -->
                 </div>

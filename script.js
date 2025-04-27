@@ -66,7 +66,7 @@ class CryptoTracker {
         let total = 0;
         portfolioList.innerHTML = '';
 
-        this.portfolio.forEach(holding => {
+        this.portfolio.forEach((holding, index) => {
             const value = holding.amount * holding.price;
             total += value;
 
@@ -75,10 +75,11 @@ class CryptoTracker {
             holdingElement.innerHTML = `
                 <div class="holding-info">
                     <h4>${holding.symbol.toUpperCase()}</h4>
-                    <span>${holding.amount} coins</span>
+                    <span>${holding.amount} coins @ $${holding.price}</span>
                 </div>
                 <div class="holding-value">
                     $${value.toFixed(2)}
+                    <button class="remove-holding" onclick="window.tracker.removeHolding(${index})">Remove</button>
                 </div>
             `;
             portfolioList.appendChild(holdingElement);
@@ -88,14 +89,47 @@ class CryptoTracker {
     }
 
     setupEventListeners() {
+        // Portfolio form submission
+        const form = document.getElementById('add-holding-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.addHolding();
+        });
+
         // Refresh prices every 30 seconds
         setInterval(() => {
             this.loadCryptoPrices();
         }, 30000);
     }
+
+    addHolding() {
+        const symbol = document.getElementById('symbol-input').value.toUpperCase();
+        const amount = parseFloat(document.getElementById('amount-input').value);
+        const price = parseFloat(document.getElementById('price-input').value);
+
+        if (!symbol || !amount || !price) return;
+
+        const holding = { symbol, amount, price };
+        this.portfolio.push(holding);
+        this.savePortfolio();
+        this.updatePortfolioDisplay();
+
+        // Clear form
+        document.getElementById('add-holding-form').reset();
+    }
+
+    removeHolding(index) {
+        this.portfolio.splice(index, 1);
+        this.savePortfolio();
+        this.updatePortfolioDisplay();
+    }
+
+    savePortfolio() {
+        localStorage.setItem('cryptoPortfolio', JSON.stringify(this.portfolio));
+    }
 }
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new CryptoTracker();
+    window.tracker = new CryptoTracker();
 });
