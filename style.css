@@ -239,4 +239,13 @@ main {
         text-align: left;
         width: 100%;
     }
+
+    #add-holding-form {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    #add-holding-form button {
+        justify-self: start;
+    }
 }
