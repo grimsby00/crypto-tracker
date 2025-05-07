@@ -12,8 +12,12 @@ class CryptoTracker {
     }
 
     async loadCryptoPrices() {
+        const cryptoList = document.getElementById('crypto-list');
+        cryptoList.innerHTML = '<p>Loading cryptocurrency data...</p>';
+
         try {
             const response = await fetch(`${this.apiUrl}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1`);
+            if (!response.ok) throw new Error('Network response was not ok');
             const cryptos = await response.json();
             this.displayCryptoPrices(cryptos);
         } catch (error) {
