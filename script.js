@@ -107,13 +107,16 @@ class CryptoTracker {
     }
 
     addHolding() {
-        const symbol = document.getElementById('symbol-input').value.toUpperCase();
+        const symbol = document.getElementById('symbol-input').value.toUpperCase().trim();
         const amount = parseFloat(document.getElementById('amount-input').value);
         const price = parseFloat(document.getElementById('price-input').value);
 
-        if (!symbol || !amount || !price) return;
+        if (!symbol || !amount || amount <= 0 || !price || price <= 0) {
+            alert('Please enter valid values for all fields');
+            return;
+        }
 
-        const holding = { symbol, amount, price };
+        const holding = { symbol, amount, price, date: new Date().toISOString() };
         this.portfolio.push(holding);
         this.savePortfolio();
         this.updatePortfolioDisplay();

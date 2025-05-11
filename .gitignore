@@ -1,7 +1,9 @@
 node_modules/
 .claude
+CLAUDE.md
 *.log
 .env
-CLAUDE.md
 dist/
 .DS_Store
+*.tmp
+coverage/
